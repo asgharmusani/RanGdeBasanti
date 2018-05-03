@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <EditText
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Mode Number"
+        android:layout_gravity="center"
+        android:paddingTop="8dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:id="@+id/modeNumber"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/modeNumber">
+
+        <Button
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight = "5"
+            android:text="Go"
+            android:id="@+id/btnSendModeNumber"
+            />
+        <Button
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight = "10"
+            android:text="Random"
+            android:id="@+id/btnRandom"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
