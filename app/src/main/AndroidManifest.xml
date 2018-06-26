@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iotechnica.rangdebasanti">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".WifiConnection"  android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.WIFI_ON" />
+                <action android:name="android.intent.action.WIFI_OFF" />
+                <action android:name="android.intent.action.CONNECT_TO_WIFI"/>
+                <action android:name="android.intent.action.CONNECT_TO_PREVIOUS_WIFI"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

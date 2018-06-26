@@ -1,5 +1,6 @@
 package com.iotechnica.rangdebasanti;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -30,8 +31,21 @@ public class ChooseColorMode extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        Intent intent = new Intent("android.intent.action.CONNECT_TO_WIFI");
+        intent.putExtra("ssid", "RGBeast");
+        intent.putExtra("password", "redbeast");
+        sendBroadcast(intent);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Intent intent = new Intent("android.intent.action.CONNECT_TO_PREVIOUS_WIFI");
+        Log.d("something","going to run intent");
+        sendBroadcast(intent);
 
     }
+
 
     private void setupViewPager(NonSwipeableViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -41,7 +55,6 @@ public class ChooseColorMode extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
     }
-
 
 
 }
