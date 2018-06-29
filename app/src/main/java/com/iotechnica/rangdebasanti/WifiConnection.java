@@ -39,7 +39,6 @@ public class WifiConnection extends BroadcastReceiver{
 
     private WifiManager wifiManager;
 
-    private static Boolean previousConnectionWifiEnabled;
     private static int previousNetworkID;
 
     public WifiConnection() {
@@ -89,12 +88,12 @@ public class WifiConnection extends BroadcastReceiver{
                     break;
                 case ACTION_CONNECT_TO_PREVIOUS_WIFI:
                     //connects to a previously connected wifi
-                    Log.d("Variable Check", "Enabled? " +previousConnectionWifiEnabled + " NetID is " + previousNetworkID);
+                    Log.d("Variable Check", "NetID is " + previousNetworkID);
                     wifiManager.disconnect();
-                    if(previousConnectionWifiEnabled && previousNetworkID != -1){
+                    if(previousNetworkID != -1){
                         connectToPreviousWifi(previousNetworkID);
                     }
-                    else if (previousNetworkID == -1){
+                    else {
                         wifiManager.setWifiEnabled(false);
                     }
 
@@ -128,7 +127,7 @@ public class WifiConnection extends BroadcastReceiver{
         if (!wifiManager.isWifiEnabled()) {
             wifiManager.setWifiEnabled(true);
         }
-
+        wifiManager.disconnect();
         wifiManager.enableNetwork(netId, true);
         wifiManager.reconnect();
     }
@@ -143,7 +142,6 @@ public class WifiConnection extends BroadcastReceiver{
         else networkInfo = null;
 
         if (networkInfo == null) {
-            previousConnectionWifiEnabled = false;
             return -1;
         }
 
@@ -151,7 +149,6 @@ public class WifiConnection extends BroadcastReceiver{
             WifiInfo connectionInfo = wifiManager.getConnectionInfo();
             if (connectionInfo != null && isTextNullOrEmpty(connectionInfo.getSSID())) {
                 Log.d("Previous netID", connectionInfo.getNetworkId()+" is the previous netID " + connectionInfo.getSSID() + " is the SSID");
-                previousConnectionWifiEnabled = true;
                 netID = connectionInfo.getNetworkId();
             }
         }
