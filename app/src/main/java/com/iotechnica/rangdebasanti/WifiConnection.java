@@ -12,6 +12,8 @@ import android.net.wifi.WifiManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.List;
+
 import static android.content.ContentValues.TAG;
 
 
@@ -54,7 +56,6 @@ public class WifiConnection extends BroadcastReceiver{
         final String action = intent.getAction();
 
         if (isTextNullOrEmpty(action)) {
-            Log.d(TAG, "action is not empty");
             switch (action) {
                 case ACTION_WIFI_ON:
                     // Turns wifi on
@@ -70,15 +71,14 @@ public class WifiConnection extends BroadcastReceiver{
 
                     if (!wifiManager.isWifiEnabled()) {
                         wifiManager.setWifiEnabled(true);
-                        while (!wifiManager.isWifiEnabled()) {
-                            //keep looping until it is activated
-                        }
+
                     }
 
                     final String networkSSID = intent.getStringExtra("ssid");
                     final String networkPassword = intent.getStringExtra("password");
 
                     previousNetworkID = getCurrentNetID(context);
+                    Log.d(TAG, "Set NetID is " + previousNetworkID);
                     if (isTextNullOrEmpty(networkSSID) && isTextNullOrEmpty(networkPassword)) {
                         connectToWifi(networkSSID, networkPassword);
                     } else {
@@ -112,15 +112,55 @@ public class WifiConnection extends BroadcastReceiver{
      * @param networkPassword - the wifi password
      */
     private void connectToWifi(final String networkSSID, final String networkPassword) {
+        int netID = -1; //default netID == -1
+        Boolean isPasswordChanged = false;
+
+        String confSSID = String.format("\"%s\"", networkSSID);
+        String confPassword = String.format("\"%s\"", networkPassword);
 
         WifiConfiguration conf = new WifiConfiguration();
-        conf.SSID = String.format("\"%s\"", networkSSID);
-        conf.preSharedKey = String.format("\"%s\"", networkPassword);
+        conf.SSID = confSSID;
+        conf.preSharedKey = confPassword;
 
-        int netId = wifiManager.addNetwork(conf);
+        List<WifiConfiguration> wifiConfigurationList = wifiManager.getConfiguredNetworks();
+        for (WifiConfiguration item : wifiConfigurationList){
+
+            //Find if the SSID is in the preconfigured list - if found get netID
+
+            if (item.SSID != null && item.SSID.equals(confSSID)){
+
+                Log.d(TAG, "Pre-configured running");
+                netID = item.networkId;
+
+                if(conf != item)
+                {
+                    isPasswordChanged = true;
+                }
+                break;
+            }
+        }
+
+        // If ssid is found in preconfigured list but still not connected means configuration issue
+        // hence update new wifi
+
+        if(isPasswordChanged && !(wifiManager.getConnectionInfo().getSSID().equals(confSSID))){
+            Log.d(TAG,"Wifi config updated");
+            conf.networkId = netID; //need to set this to update the specific
+            netID = wifiManager.updateNetwork(conf);
+        }
+
+        // If ssid not found in preconfigured list it will return -1
+        // then add new wifi
+
+        else if (netID == -1) {
+            Log.d(TAG,"New wifi config added");
+            netID = wifiManager.addNetwork(conf);
+        }
+
         wifiManager.disconnect();
-        wifiManager.enableNetwork(netId, true);
+        wifiManager.enableNetwork(netID, true);
         wifiManager.reconnect();
+
     }
 
     private void connectToPreviousWifi (final int netId){

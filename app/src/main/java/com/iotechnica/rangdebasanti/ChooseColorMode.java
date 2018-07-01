@@ -34,11 +34,11 @@ public class ChooseColorMode extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        intentConnectToRGB();
     }
 
     @Override
     protected void onResume(){
+        Log.d(TAG, "onResume: Starting.");
         super.onResume();
         intentConnectToRGB();
     }
