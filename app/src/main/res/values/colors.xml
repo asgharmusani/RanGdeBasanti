@@ -6,5 +6,11 @@
 
     <color name="colorMetalGrey">#454948</color>
     <color name="defaultColor">#40bfbf</color>
+    <color name="textWhite">#FFFFFF</color>
+    <color name="bgShade1">#9B0000</color>
+    <color name="bgShade2">#210000</color>
+    <color name="bgShade3">#330000</color>
+    <color name="bgShade4">#515052</color>
+
 
 </resources>

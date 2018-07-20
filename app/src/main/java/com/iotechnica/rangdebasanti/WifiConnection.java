@@ -113,7 +113,6 @@ public class WifiConnection extends BroadcastReceiver{
      */
     private void connectToWifi(final String networkSSID, final String networkPassword) {
         int netID = -1; //default netID == -1
-        Boolean isPasswordChanged = false;
 
         String confSSID = String.format("\"%s\"", networkSSID);
         String confPassword = String.format("\"%s\"", networkPassword);
@@ -131,28 +130,13 @@ public class WifiConnection extends BroadcastReceiver{
 
                 Log.d(TAG, "Pre-configured running");
                 netID = item.networkId;
-
-                if(conf != item)
-                {
-                    isPasswordChanged = true;
-                }
-                break;
             }
-        }
-
-        // If ssid is found in preconfigured list but still not connected means configuration issue
-        // hence update new wifi
-
-        if(isPasswordChanged && !(wifiManager.getConnectionInfo().getSSID().equals(confSSID))){
-            Log.d(TAG,"Wifi config updated");
-            conf.networkId = netID; //need to set this to update the specific
-            netID = wifiManager.updateNetwork(conf);
         }
 
         // If ssid not found in preconfigured list it will return -1
         // then add new wifi
 
-        else if (netID == -1) {
+        if (netID == -1) {
             Log.d(TAG,"New wifi config added");
             netID = wifiManager.addNetwork(conf);
         }
