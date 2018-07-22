@@ -1,4 +1,4 @@
-package com.iotechnica.rangdebasanti;
+package com.iotechnica.rangdebasanti.TabLayout;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

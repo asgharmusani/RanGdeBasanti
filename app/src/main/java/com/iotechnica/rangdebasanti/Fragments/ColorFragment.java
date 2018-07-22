@@ -1,20 +1,15 @@
-package com.iotechnica.rangdebasanti;
+package com.iotechnica.rangdebasanti.Fragments;
 
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.iotechnica.rangdebasanti.Connection.GetRequest;
+import com.iotechnica.rangdebasanti.R;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 

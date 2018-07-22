@@ -1,4 +1,4 @@
-package com.iotechnica.rangdebasanti;
+package com.iotechnica.rangdebasanti.TabLayout;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

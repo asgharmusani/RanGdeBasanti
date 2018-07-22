@@ -1,4 +1,4 @@
-package com.iotechnica.rangdebasanti;
+package com.iotechnica.rangdebasanti.Connection;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

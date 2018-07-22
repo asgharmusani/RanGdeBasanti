@@ -7,10 +7,12 @@
     <color name="colorMetalGrey">#454948</color>
     <color name="defaultColor">#40bfbf</color>
     <color name="textWhite">#FFFFFF</color>
-    <color name="bgShade1">#9B0000</color>
-    <color name="bgShade2">#210000</color>
-    <color name="bgShade3">#330000</color>
-    <color name="bgShade4">#515052</color>
+    <color name="textWhiteDark">#E8E8E8</color>
+
+    <color name="toolBarTop">#9B0000</color>
+    <color name="tabBar">#210000</color>
+    <color name="bgFragment">#330000</color>
+    <color name="bgCard">#4F0000</color>
 
 
 </resources>

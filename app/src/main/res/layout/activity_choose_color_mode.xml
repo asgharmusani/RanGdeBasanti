@@ -13,7 +13,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bgShade2"
+        android:background="@color/tabBar"
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:background="@color/bgShade1"
+            android:background="@color/toolBarTop"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             >
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/titleMain"
-                android:textSize="27sp"
+                android:textSize="20sp"
                 android:textColor="@color/textWhite"
                 android:layout_gravity="center"
                 android:id="@+id/toolbar_title"/>
@@ -40,25 +40,17 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:background="@color/bgShade2"
-            app:tabIndicatorColor="@color/bgShade1"
+            android:background="@color/tabBar"
+            app:tabIndicatorColor="@color/toolBarTop"
             android:layout_height="wrap_content">
         </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.iotechnica.rangdebasanti.NonSwipeableViewPager
+    <com.iotechnica.rangdebasanti.TabLayout.NonSwipeableViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <android.support.v7.widget.AppCompatImageView
-        android:paddingTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:src="@drawable/iotechnica"/>
 
 </android.support.design.widget.CoordinatorLayout>

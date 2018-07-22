@@ -1,4 +1,4 @@
-package com.iotechnica.rangdebasanti;
+package com.iotechnica.rangdebasanti.Connection;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class GetRequest {
         return response.body().string();
     }
 
-    Boolean initiateRequest(String address, String value)
+    public Boolean initiateRequest(String address, String value)
     {
         Runnable request = () ->{
             try {

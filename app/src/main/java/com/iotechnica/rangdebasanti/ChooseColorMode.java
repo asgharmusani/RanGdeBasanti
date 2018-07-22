@@ -8,6 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.iotechnica.rangdebasanti.Fragments.ColorFragment;
+import com.iotechnica.rangdebasanti.Fragments.ModesFragment;
+import com.iotechnica.rangdebasanti.TabLayout.NonSwipeableViewPager;
+import com.iotechnica.rangdebasanti.TabLayout.SectionsPageAdapter;
+
 
 public class ChooseColorMode extends AppCompatActivity {
 

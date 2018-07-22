@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -25,7 +26,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".WifiConnection"  android:exported="true">
+        <receiver android:name=".Connection.WifiConnection"  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.WIFI_ON" />
                 <action android:name="android.intent.action.WIFI_OFF" />
@@ -33,6 +34,7 @@
                 <action android:name="android.intent.action.CONNECT_TO_PREVIOUS_WIFI"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
