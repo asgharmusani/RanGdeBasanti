@@ -18,9 +18,6 @@ public class ChooseColorMode extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private SectionsPageAdapter mSectionsPageAdapter;
-    private NonSwipeableViewPager mViewPager;
-
     private static final String ssid = "RGBeast";
     private static final String password = "redbeast";
 
@@ -30,10 +27,10 @@ public class ChooseColorMode extends AppCompatActivity {
         setContentView(R.layout.activity_choose_color_mode);
         Log.d(TAG, "onCreate: Starting.");
 
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        SectionsPageAdapter mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.container);
+        NonSwipeableViewPager mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
@@ -70,7 +67,6 @@ public class ChooseColorMode extends AppCompatActivity {
 
     private void intentConnectToPreviousWifi(){
         Intent intent = new Intent("android.intent.action.CONNECT_TO_PREVIOUS_WIFI");
-        Log.d("something","going to run intent");
         sendBroadcast(intent);
     }
 

@@ -5,35 +5,41 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/modeCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:layout_marginBottom="6dp"
+        android:foreground="@drawable/selector_card"
+
+        android:focusable="true"
+        android:clickable="true"
+
         app:cardBackgroundColor="@color/bgCard"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="5dp">
 
-        >
-        
-        <LinearLayout
+        <RelativeLayout
 
-            android:id="@+id/modeListLinearLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewModeName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mode Name"
+                android:text="@string/modeName"
                 android:textColor="@color/textWhite"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
@@ -43,11 +49,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textWhiteDark"
-                android:text="Description"
+                android:text="@string/modeDescription"
+                android:layout_below="@id/textViewModeName"
                 android:paddingLeft="1dp"
-                android:paddingTop="4dp"/>
-        </LinearLayout>
-        
+                android:paddingTop="4dp"
+                android:paddingStart="1dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/btnFavourite"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_fav"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/selector_ic_fav"
+                />
+        </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 
 

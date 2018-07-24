@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:background="@color/tabBar"
         android:paddingTop="@dimen/appbar_padding_top"
-        android:theme="@style/AppTheme.AppBarOverlay">
+
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,8 +25,7 @@
             android:minHeight="?attr/actionBarSize"
             android:background="@color/bgCard"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            >
+            app:popupTheme="@style/AppTheme.PopupOverlay">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -6,4 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_try_color_picker">TryColorPicker</string>
     <string name="titleMain">Project RGBeast</string>
+    <string name="modeDescription">Description</string>
+    <string name="modeName">Mode Name</string>
 </resources>

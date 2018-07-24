@@ -1,10 +1,9 @@
 package com.iotechnica.rangdebasanti.ModeList;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.iotechnica.rangdebasanti.R;
 
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 
 public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRecyclerViewAdapter.ViewHolder> {
 
@@ -49,7 +47,7 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
         holder.textViewModeName.setText(listItem.getModeName());
         holder.textViewDescription.setText(listItem.getDescription());
 
-        holder.linearLayout.setOnClickListener(v -> {
+        holder.cardView.setOnClickListener(v -> {
 
             address = "192.168.4.1";
             modeNumber = "m=" + listItem.getModeNumber();
@@ -60,8 +58,6 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
                 System.out.println("THE LIGHT IS WORKING");
             }
 
-            Toast.makeText(context, "Click on " + listItem.getModeName(), Toast.LENGTH_LONG).show();
-
         });
 
     }
@@ -71,18 +67,19 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
         return listItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewModeName;
         TextView textViewDescription;
-        LinearLayout linearLayout;
+        CardView cardView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
 
             textViewModeName = itemView.findViewById(R.id.textViewModeName);
             textViewDescription = itemView.findViewById(R.id.textViewModeDescription);
-            linearLayout = itemView.findViewById(R.id.modeListLinearLayout);
+            cardView = itemView.findViewById(R.id.modeCardView);
+
 
         }
     }

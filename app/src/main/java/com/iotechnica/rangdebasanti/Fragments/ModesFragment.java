@@ -1,6 +1,7 @@
 package com.iotechnica.rangdebasanti.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,36 +9,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.iotechnica.rangdebasanti.Connection.GetRequest;
 import com.iotechnica.rangdebasanti.ModeList.ModeListItem;
 import com.iotechnica.rangdebasanti.ModeList.ModeListRecyclerViewAdapter;
 import com.iotechnica.rangdebasanti.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ModesFragment extends Fragment{
     private static final String TAG = "ModesFragment";
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
     private List<ModeListItem> mListItems;
 
-    private Button btnSendModeNumber, btnRandom;
-    private GetRequest makeRequest;
-    private String modeNumber, address;
-    private TextView textModeNumber;
-    private Random random;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.modes_fragment,container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -45,10 +35,9 @@ public class ModesFragment extends Fragment{
 
         addModeList();
 
-        mAdapter = new ModeListRecyclerViewAdapter(mListItems, getActivity());
+        RecyclerView.Adapter mAdapter = new ModeListRecyclerViewAdapter(mListItems, getActivity());
 
         recyclerView.setAdapter(mAdapter);
-
 
         return view;
 
