@@ -82,5 +82,5 @@
         colorPicker:bar_pointer_radius="10dp"
         colorPicker:bar_thickness="8dp" />
 
-
 </RelativeLayout>
+

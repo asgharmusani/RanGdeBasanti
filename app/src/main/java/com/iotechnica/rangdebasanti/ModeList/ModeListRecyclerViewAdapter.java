@@ -4,13 +4,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.iotechnica.rangdebasanti.Connection.GetRequest;
 import com.iotechnica.rangdebasanti.R;
 
@@ -23,11 +23,15 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
     private Context context;
     private String address, modeNumber;
     private GetRequest makeRequest;
+    private StoreData storeData;
 
+
+    private static final String TAG = "ModeListAdapter";
 
     public ModeListRecyclerViewAdapter(List<ModeListItem> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
+        storeData = new StoreData();
     }
 
     @NonNull
@@ -46,6 +50,8 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
 
         holder.textViewModeName.setText(listItem.getModeName());
         holder.textViewDescription.setText(listItem.getDescription());
+        holder.materialFavoriteButton.setFavorite(isFavorite(listItem), false);
+
 
         holder.cardView.setOnClickListener(v -> {
 
@@ -60,6 +66,21 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
 
         });
 
+        holder.materialFavoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.materialFavoriteButton.toggleFavorite();
+                if(holder.materialFavoriteButton.isFavorite()){
+                    storeData.addFavorite(context, listItem);
+                    Log.d(TAG, "add fav");
+                }
+                else {
+                    storeData.removeFavorite(context, listItem);
+                    Log.d(TAG, "remove fav");
+                }
+            }
+        });
+
     }
 
     @Override
@@ -72,6 +93,7 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
         TextView textViewModeName;
         TextView textViewDescription;
         CardView cardView;
+        MaterialFavoriteButton materialFavoriteButton;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -79,8 +101,23 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
             textViewModeName = itemView.findViewById(R.id.textViewModeName);
             textViewDescription = itemView.findViewById(R.id.textViewModeDescription);
             cardView = itemView.findViewById(R.id.modeCardView);
+            materialFavoriteButton = itemView.findViewById(R.id.btnFavourite);
 
 
         }
+    }
+
+    public boolean isFavorite(ModeListItem checkProduct) {
+        boolean check = false;
+        List<ModeListItem> favorites = storeData.getFavorites(context);
+        if (favorites != null) {
+            for (ModeListItem item : favorites) {
+                if (item.equals(checkProduct)) {
+                    check = true;
+                    break;
+                }
+            }
+        }
+        return check;
     }
 }

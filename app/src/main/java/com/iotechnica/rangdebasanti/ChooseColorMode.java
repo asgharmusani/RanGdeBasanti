@@ -1,13 +1,12 @@
 package com.iotechnica.rangdebasanti;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-
-
-import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.stetho.Stetho;
 import com.iotechnica.rangdebasanti.Fragments.ColorFragment;
 import com.iotechnica.rangdebasanti.Fragments.ModesFragment;
 import com.iotechnica.rangdebasanti.TabLayout.NonSwipeableViewPager;
@@ -24,6 +23,8 @@ public class ChooseColorMode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
+
         setContentView(R.layout.activity_choose_color_mode);
         Log.d(TAG, "onCreate: Starting.");
 

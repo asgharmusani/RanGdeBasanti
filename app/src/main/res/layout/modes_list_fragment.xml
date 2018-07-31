@@ -12,7 +12,7 @@
 
     <android.support.v7.widget.CardView
 
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card="http://schemas.android.com/apk/res-auto"
         android:id="@+id/modeCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,12 +24,13 @@
         android:focusable="true"
         android:clickable="true"
 
-        app:cardBackgroundColor="@color/bgCard"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="5dp">
+        card:cardBackgroundColor="@color/bgCard"
+        card:cardCornerRadius="4dp"
+        card:cardElevation="5dp">
 
         <RelativeLayout
 
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_horizontal_margin"
@@ -56,18 +57,25 @@
                 android:paddingStart="1dp"
                 tools:ignore="RtlSymmetry" />
 
-            <ImageView
+            <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                xmlns:favBtn="http://schemas.android.com/apk/res-auto"
+
                 android:id="@+id/btnFavourite"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_fav"
-                android:layout_alignParentEnd="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/selector_ic_fav"
+                android:layout_alignRight="@id/textViewModeDescription"
+                android:layout_alignEnd="@id/textViewModeDescription"
+                favBtn:mfb_size="50"
+                favBtn:mfb_color="white"
+                favBtn:mfb_rotation_angle="0"
+                favBtn:mfb_rotation_duration="0"
+                favBtn:mfb_animate_unfavorite="true"
+                favBtn:mfb_type="heart"
                 />
+
+
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

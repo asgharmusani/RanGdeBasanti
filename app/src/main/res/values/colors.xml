@@ -3,9 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTransparent">#00ffffff</color>
 
     <color name="colorMetalGrey">#454948</color>
-    <color name="defaultColor">#40bfbf</color>
+    <color name="defaultColor">#FFFF4081</color>
     <color name="textWhite">#FFFFFF</color>
     <color name="textWhiteDark">#E8E8E8</color>
 
@@ -16,6 +17,7 @@
     <color name="tabBar">#210000</color>
     <color name="bgFragment">#330000</color>
     <color name="bgCard">#4F0000</color>
+    <color name="btnFav">#ff0000</color>
 
 
 </resources>
