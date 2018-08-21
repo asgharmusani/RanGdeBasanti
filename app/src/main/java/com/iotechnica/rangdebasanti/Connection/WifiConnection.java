@@ -121,16 +121,21 @@ public class WifiConnection extends BroadcastReceiver{
         conf.SSID = confSSID;
         conf.preSharedKey = confPassword;
 
-        List<WifiConfiguration> wifiConfigurationList = wifiManager.getConfiguredNetworks();
-        for (WifiConfiguration item : wifiConfigurationList){
+        try{
+            List<WifiConfiguration> wifiConfigurationList = wifiManager.getConfiguredNetworks();
+            for (WifiConfiguration item : wifiConfigurationList){
 
-            //Find if the SSID is in the preconfigured list - if found get netID
+                //Find if the SSID is in the preconfigured list - if found get netID
 
-            if (item.SSID != null && item.SSID.equals(confSSID)){
+                if (item.SSID != null && item.SSID.equals(confSSID)){
 
-                Log.d(TAG, "Pre-configured running");
-                netID = item.networkId;
+                    Log.d(TAG, "Pre-configured running");
+                    netID = item.networkId;
+                }
             }
+        }
+        catch (NullPointerException npe){
+            npe.printStackTrace();
         }
 
         // If ssid not found in preconfigured list it will return -1

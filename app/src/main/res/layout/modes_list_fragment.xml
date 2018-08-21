@@ -71,7 +71,7 @@
                 favBtn:mfb_rotation_angle="0"
                 favBtn:mfb_rotation_duration="0"
                 favBtn:mfb_animate_unfavorite="true"
-                favBtn:mfb_type="heart"
+                favBtn:mfb_type="star"
                 />
 
 

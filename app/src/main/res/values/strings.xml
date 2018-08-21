@@ -8,4 +8,5 @@
     <string name="titleMain">Project RGBeast</string>
     <string name="modeDescription">Description</string>
     <string name="modeName">Mode Name</string>
+    <string name="stringDefault">Default</string>
 </resources>

@@ -11,19 +11,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StoreData {
-    public StoreData() {
-        super();
-    }
+
 
     private static final String PREFS_NAME = "Data";
     private static final String FAVORITES = "Favorite_Selected";
+    public SharedPreferences settings;
+
+    public StoreData(Context context) {
+        this.settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    }
 
     // This four methods are used for maintaining favorites.
-    public void saveFavorite(Context context, List<ModeListItem> favorites) {
-        SharedPreferences settings;
+    private void saveFavorite(List<ModeListItem> favorites) {
         Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         editor = settings.edit();
 
         Gson gson = new Gson();
@@ -33,27 +34,24 @@ public class StoreData {
         editor.apply();
     }
 
-    public void addFavorite(Context context, ModeListItem product) {
-        List<ModeListItem> favorites = getFavorites(context);
+    public void addFavorite(ModeListItem product) {
+        List<ModeListItem> favorites = getFavorites();
         if (favorites == null)
             favorites = new ArrayList<>();
         favorites.add(product);
-        saveFavorite(context, favorites);
+        saveFavorite(favorites);
     }
 
-    public void removeFavorite(Context context, ModeListItem product) {
-        ArrayList<ModeListItem> favorites = getFavorites(context);
+    public void removeFavorite(ModeListItem product) {
+        ArrayList<ModeListItem> favorites = getFavorites();
         if (favorites != null) {
             favorites.remove(product);
-            saveFavorite(context, favorites);
+            saveFavorite(favorites);
         }
     }
 
-    public ArrayList<ModeListItem> getFavorites(Context context) {
-        SharedPreferences settings;
+    public ArrayList<ModeListItem> getFavorites() {
         List<ModeListItem> favorites;
-
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         if (settings.contains(FAVORITES)) {
             String jsonFavorites = settings.getString(FAVORITES, null);

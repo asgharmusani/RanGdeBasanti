@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.iotechnica.rangdebasanti.Connection.GetRequest;
@@ -31,7 +32,7 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
     public ModeListRecyclerViewAdapter(List<ModeListItem> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
-        storeData = new StoreData();
+        storeData = new StoreData(context);
     }
 
     @NonNull
@@ -52,7 +53,6 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
         holder.textViewDescription.setText(listItem.getDescription());
         holder.materialFavoriteButton.setFavorite(isFavorite(listItem), false);
 
-
         holder.cardView.setOnClickListener(v -> {
 
             address = "192.168.4.1";
@@ -66,18 +66,35 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
 
         });
 
-        holder.materialFavoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.materialFavoriteButton.toggleFavorite();
-                if(holder.materialFavoriteButton.isFavorite()){
-                    storeData.addFavorite(context, listItem);
-                    Log.d(TAG, "add fav");
+        holder.materialFavoriteButton.setOnClickListener(v -> {
+            holder.materialFavoriteButton.toggleFavorite();
+            if(holder.materialFavoriteButton.isFavorite()){
+
+                if(storeData.getFavorites()!=null){
+                    if(storeData.getFavorites().size() <=2){
+
+                        Log.d(TAG,""+storeData.getFavorites().size());
+                        //limit of data allowed is 3
+                        storeData.addFavorite(listItem);
+                        Log.d(TAG, "add fav");
+                    }
+                    else {
+                        Toast.makeText(context,"Can't choose more than 3 fav",Toast.LENGTH_SHORT).show();
+                        holder.materialFavoriteButton.toggleFavorite();
+                    }
                 }
                 else {
-                    storeData.removeFavorite(context, listItem);
-                    Log.d(TAG, "remove fav");
+                    //will only work if the sharedPreferences is null
+                    //that means if it's not created
+                    //will work the first time only
+                    storeData.addFavorite(listItem);
+                    Log.d(TAG, "add fav");
                 }
+
+            }
+            else {
+                storeData.removeFavorite(listItem);
+                Log.d(TAG, "remove fav");
             }
         });
 
@@ -109,7 +126,7 @@ public class ModeListRecyclerViewAdapter extends RecyclerView.Adapter<ModeListRe
 
     public boolean isFavorite(ModeListItem checkProduct) {
         boolean check = false;
-        List<ModeListItem> favorites = storeData.getFavorites(context);
+        List<ModeListItem> favorites = storeData.getFavorites();
         if (favorites != null) {
             for (ModeListItem item : favorites) {
                 if (item.equals(checkProduct)) {
